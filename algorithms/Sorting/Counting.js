@@ -2,7 +2,7 @@ function sortCounting(arr) {
 	let output = new Array(arr.length + 1);
 	let size = arr.length;
 
-	// find the longest number
+	// find the longest number =>
 	let max = Math.max(...arr);
 
 	// Initialize count array with all zeros.

@@ -1,0 +1,50 @@
+  /////Big oh Notation (O)
+-Big O notation is an asymptotic notation that measures the performance of an algorithm by simply  providing the order of growth of the function.
+
+-This notation provides an upper bound on a function which ensures that the function never grows faster than the upper bound. So, it gives the least upper bound on a function so that the function never grows faster than this upper bound.
+
+  ////Omega Notation (Ω)
+-It basically describes the best-case scenario which is opposite to the big o notation.
+
+-It is the formal way to represent the lower bound of an algorithm's running time. It measures the best amount of time an algorithm can possibly take to complete or the best-case time complexity.
+
+-It determines what is the fastest time that an algorithm can run.
+
+
+ OMEGA EXAMPLE:
+ If we required that an algorithm takes at least certain amount of time without using an upper bound, we use big- Ω notation i.e. the Greek letter "omega". It is used to bound the growth of running time for large input size.
+
+If f(n) and g(n) are the two functions defined for positive integers,
+
+then f(n) = Ω (g(n)) as f(n) is Omega of g(n) or f(n) is on the order of g(n)) if there exists constants c and no such that:
+
+f(n)>=c.g(n) for all n≥no and c>0
+
+Let's consider a simple example.
+
+If f(n) = 2n+3, g(n) = n,
+
+Is f(n)= Ω (g(n))?
+
+It must satisfy the condition:
+
+f(n)>=c.g(n)
+
+To check the above condition, we first replace f(n) by 2n+3 and g(n) by n.
+
+2n+3>=c*n
+
+Suppose c=1
+
+2n+3>=n (This equation will be true for any value of n starting from 1).
+
+Therefore, it is proved that g(n) is big omega of 2n+3 function.
+
+  /// Theta Notation (θ)
+-The theta notation mainly describes the average case scenarios.
+
+-It represents the realistic time complexity of an algorithm. Every time, an algorithm does not perform worst or best, in real-world problems, algorithms mainly fluctuate between the worst-case and best-case, and this gives us the average case of the algorithm.
+
+-Big theta is mainly used when the value of worst-case and the best-case is same.
+
+-It is the formal way to express both the upper bound and lower bound of an algorithm running time.

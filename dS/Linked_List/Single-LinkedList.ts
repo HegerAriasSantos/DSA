@@ -1,25 +1,11 @@
-// Array
-// const array: Array<any> = [];
-// String
-// const string: string =
-// 	"Como decirle que te amo si me ha preguntado; yo le dije que no.";
-// // Boolean
-// const isTrue: boolean = true;
-// // Integer
-// const twenty: number = 10;
+import Nodo from "./Node";
 
-// Singly Linked List
-
-class Nodo {
-	constructor(data) {
-		this.data = data;
-		this.next = null;
-	}
-}
-
-class ListaEnlazada {
+export default class ListaEnlazada {
+	head;
+	tail;
 	constructor() {
 		this.head = new Nodo(null);
+		this.tail = this.head;
 	}
 
 	// Agregar elemento al principio de la lista
@@ -71,7 +57,7 @@ class ListaEnlazada {
 		let index = 0;
 		let current = this.head;
 		while (current.next !== null) {
-			if (current.data === data) {
+			if (current.value === data) {
 				return index;
 			}
 			index++;
@@ -83,8 +69,8 @@ class ListaEnlazada {
 	replace(value, data) {
 		let current = this.head;
 		while (current.next !== null) {
-			if (current.data === value) {
-				current.data = data;
+			if (current.value === value) {
+				current.value = data;
 				return;
 			}
 			current = current.next;
@@ -97,12 +83,27 @@ class ListaEnlazada {
 		for (let i = 0; i === index; i++) {
 			current = current.next;
 		}
-		current.data = value;
+		current.value = value;
 	}
 
 	// OPCIONAL!!
+
 	invert() {
-		//   Invierte el orden de los elementos en la lista
+		this.imprimir();
+		let node = this.head;
+		this.head = this.tail;
+		this.tail = node;
+		let next;
+		let prev = null;
+		while (node) {
+			next = node.next;
+			node.next = prev;
+			prev = node;
+			node = next;
+		}
+
+		this.imprimir();
+		return this;
 	}
 
 	findLoop() {}
@@ -112,11 +113,11 @@ class ListaEnlazada {
 		let nodoActual = this.head;
 
 		while (nodoActual.next != null) {
-			str += `${nodoActual.data} => `;
+			str += `${nodoActual.value} => `;
 			nodoActual = nodoActual.next;
 		}
 
-		str += `${nodoActual.data}`;
+		str += `${nodoActual.value}`;
 
 		console.log(str);
 	}
@@ -128,4 +129,4 @@ listaEnlazada.unshift(1);
 listaEnlazada.unshift(2);
 listaEnlazada.unshift(3);
 listaEnlazada.unshift(4);
-listaEnlazada.imprimir();
+listaEnlazada.invert();

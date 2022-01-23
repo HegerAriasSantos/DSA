@@ -1,11 +1,4 @@
-class Nodo {
-	constructor(data) {
-		this.data = data;
-		this.next = null;
-		this.before = null;
-	}
-}
-
+import Nodo from "./Node";
 export default class ListaEnlazada {
 	constructor() {
 		this.head = new Nodo(null);
@@ -154,6 +147,23 @@ export default class ListaEnlazada {
 		str += `${nodoActual.data}`;
 
 		console.log(str);
+	}
+
+	fromArray(values) {
+		values.forEach(value => this.push(value));
+
+		return this;
+	}
+	toArray() {
+		const nodes = [];
+
+		let currentNode = this.head;
+		while (currentNode) {
+			nodes.push(currentNode);
+			currentNode = currentNode.next;
+		}
+
+		return nodes;
 	}
 }
 
