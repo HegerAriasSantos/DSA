@@ -63,7 +63,7 @@ class SingleLinkedList {
 			}
 			index++;
 			current = current.next;
-		}
+		};
 		return -1;
 	}
 
@@ -157,6 +157,7 @@ class SingleLinkedList {
      to fix the loop */
 		pointer2.next = null;
 	}
+
 	print() {
 		let str = "";
 		let nodoActual = this.head;
@@ -182,7 +183,7 @@ SingleLinkedList2.unshift(3);
 SingleLinkedList2.unshift(4);
 SingleLinkedList2.print();
 SingleLinkedList2.createLoop();
-const { isLoop, loopStart } = SingleLinkedList2.findLoop()
+const { isLoop, loopStart } = SingleLinkedList2.findLoop();
 console.log(isLoop, "at the node " + loopStart.value );
 if (isLoop === true){
 	SingleLinkedList2.removeLoop(loopStart)

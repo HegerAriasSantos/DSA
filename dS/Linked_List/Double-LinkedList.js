@@ -12,7 +12,6 @@ class DoublyLinkedList {
 		this.tail = this.head;
 	}
 
-	// add to the begin of list
 	unshift(data) {
 		if (this.head.value === null) {
 			this.head.value = data;
@@ -24,7 +23,6 @@ class DoublyLinkedList {
 		this.head = nodo;
 	}
 
-	// add to the end of list
 	push(data) {
 		if (this.head.value === null) {
 			this.head.value = data;
@@ -35,7 +33,7 @@ class DoublyLinkedList {
 		this.tail.next = nodo;
 		this.tail = nodo;
 	}
-	// delete to the end of list
+
 	pop() {
 		if (this.head.value === null) {
 			return;
@@ -44,7 +42,7 @@ class DoublyLinkedList {
 		this.tail = current.before;
 		current.before = null;
 	}
-	// delete to the begin of list
+
 	shift() {
 		if (this.head.value === null) {
 			return;
@@ -54,7 +52,7 @@ class DoublyLinkedList {
 		current.next = null;
 		return current;
 	}
-	//there's nothing to say about this :V
+
 	insertAtIndex(index, data) {
 		let current = this.head;
 		let nodo = new Nodo(data);
@@ -63,10 +61,9 @@ class DoublyLinkedList {
 		}
 		nodo.next = current.next;
 		current.next = nodo;
-
 		current.before = nodo;
 	}
-	// this neither
+
 	removeAtIndex(index) {
 		let current = this.head;
 		for (let i = 0; i === index - 1; i++) {
@@ -79,20 +76,18 @@ class DoublyLinkedList {
 		nodoToDelete.next = null;
 		nodoToDelete.before = null;
 	}
-	// again XD
+
 	find(data) {
-		let index = 0;
 		let current = this.head;
 		while (current.next !== null) {
 			if (current.value === data) {
 				return current;
 			}
-			index++;
 			current = current.next;
 		}
 		return -1;
 	}
-	// it's getting a loop
+
 	replace(value, newData) {
 		let current = this.head;
 		while (current.next !== null) {
@@ -104,7 +99,7 @@ class DoublyLinkedList {
 		}
 		return false;
 	}
-	//the method's name is predicate :V
+
 	replaceAtIndex(index, value) {
 		let current = this.head;
 		for (let i = 0; i === index; i++) {
@@ -112,12 +107,13 @@ class DoublyLinkedList {
 		}
 		current.value = value;
 	}
-	// OPCIONAL!!
+
 	invert() {
 		let currentTail = this.tail;
 		let currentHead = this.head;
 		let auxiliarVariable;
 		while (currentHead.next !== null) {
+
 			auxiliarVariable = currentHead.value;
 			currentHead.value = currentTail.value;
 			currentTail.value = auxiliarVariable;
@@ -132,13 +128,51 @@ class DoublyLinkedList {
 		let turtle = this.head;
 		let hare = this.head.next;
 		while (turtle.next !== null || hare.next !== null) {
-			if (turtle === hare) return true;
+      if (turtle === hare)  return {isLoop: true, loopStart: turtle} 
 			turtle = turtle.next;
 			hare = hare.next;
-			if (hare.next === null) return false;
 			hare = hare.next;
+      if (hare.next === null) return false;
 		}
 		return false;
+	}
+	
+	removeLoop(loop) {
+		let pointer1 = loop;
+		let pointer2 = loop;
+
+		// Count the number of nodes in loop
+		let n = 1;
+
+		while (pointer1.next != pointer2) {
+			pointer1 = pointer1.next;
+			n++;
+		}
+		// Fix one pointer to head
+		pointer1 = this.head;
+
+		// And the other pointer to
+		// n nodes after head
+		pointer2 = this.head;
+		for (let i = 0; i < n; i++) {
+			pointer2 = pointer2.next;
+		}
+
+		/*  Move both pointers at the same pace,
+     they will meet at loop starting node */
+		while (pointer2 != pointer1) {
+			pointer1 = pointer1.next;
+			pointer2 = pointer2.next;
+		}
+
+		// Get pointer to the last node
+		while (pointer2.next != pointer1) {
+			pointer2 = pointer2.next;
+		}
+
+		/* Set the next node of the loop ending node
+     to fix the loop */
+		pointer2.next = null;
 	}
 
 	imprimir() {
@@ -159,6 +193,7 @@ class DoublyLinkedList {
 		arr.forEach(value => this.push(value));
 		return this;
 	}
+
 	toArray() {
 		const nodes = [];
 		let currentNode = this.head;
@@ -176,8 +211,11 @@ doubleList.push(1);
 doubleList.push(2);
 doubleList.push(3);
 doubleList.push(4);
-// doubleList.tail.next = doubleList.head;
-// doubleList.head.before = doubleList.tail;
-console.log(
-	doubleList.findLoop() ? "Yeah there's a loop" : "Nop there's not a loop",
-);
+doubleList.tail.next = doubleList.head;
+doubleList.head.before = doubleList.tail;
+const { isLoop, loopStart } = doubleList.findLoop();
+console.log(isLoop, "at the node " + loopStart.value );
+if (isLoop === true){
+  doubleList.removeLoop(loopStart)
+}
+
