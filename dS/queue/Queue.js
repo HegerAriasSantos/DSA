@@ -156,6 +156,7 @@ class ListaEnlazada {
 		console.log(str);
 	}
 }
+
 class queue {
 	constructor() {
 		this.length = 0;
