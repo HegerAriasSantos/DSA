@@ -1,14 +1,21 @@
-import Nodo from "./Node";
-export default class ListaEnlazada {
-	constructor() {
-		this.head = new Nodo(null);
+class Nodo {
+	constructor(data) {
+		this.value = data;
+		this.next = null;
+		this.before = null;
+	}
+}
+
+class DoublyLinkedList {
+	constructor(nodeData) {
+		this.head = new Nodo(nodeData);
 		this.tail = this.head;
 	}
 
 	// add to the begin of list
 	unshift(data) {
-		if (this.head.data === null) {
-			this.head.data = data;
+		if (this.head.value === null) {
+			this.head.value = data;
 			return;
 		}
 		let nodo = new Nodo(data);
@@ -19,8 +26,8 @@ export default class ListaEnlazada {
 
 	// add to the end of list
 	push(data) {
-		if (this.head.data === null) {
-			this.head.data = data;
+		if (this.head.value === null) {
+			this.head.value = data;
 			return;
 		}
 		let nodo = new Nodo(data);
@@ -30,7 +37,7 @@ export default class ListaEnlazada {
 	}
 	// delete to the end of list
 	pop() {
-		if (this.head.data === null) {
+		if (this.head.value === null) {
 			return;
 		}
 		let current = this.tail;
@@ -39,7 +46,7 @@ export default class ListaEnlazada {
 	}
 	// delete to the begin of list
 	shift() {
-		if (this.head.data === null) {
+		if (this.head.value === null) {
 			return;
 		}
 		let current = this.head;
@@ -77,8 +84,8 @@ export default class ListaEnlazada {
 		let index = 0;
 		let current = this.head;
 		while (current.next !== null) {
-			if (current.data === data) {
-				return index;
+			if (current.value === data) {
+				return current;
 			}
 			index++;
 			current = current.next;
@@ -86,11 +93,11 @@ export default class ListaEnlazada {
 		return -1;
 	}
 	// it's getting a loop
-	replace(value, data) {
+	replace(value, newData) {
 		let current = this.head;
 		while (current.next !== null) {
-			if (current.data === value) {
-				current.data = data;
+			if (current.value === value) {
+				current.value = newData;
 				return true;
 			}
 			current = current.next;
@@ -103,18 +110,17 @@ export default class ListaEnlazada {
 		for (let i = 0; i === index; i++) {
 			current = current.next;
 		}
-		current.data = value;
+		current.value = value;
 	}
-
 	// OPCIONAL!!
 	invert() {
 		let currentTail = this.tail;
 		let currentHead = this.head;
 		let auxiliarVariable;
 		while (currentHead.next !== null) {
-			auxiliarVariable = currentHead.data;
-			currentHead.data = currentTail.data;
-			currentTail.data = auxiliarVariable;
+			auxiliarVariable = currentHead.value;
+			currentHead.value = currentTail.value;
+			currentTail.value = auxiliarVariable;
 
 			currentHead = currentHead.next;
 			currentTail = currentTail.before;
@@ -140,41 +146,38 @@ export default class ListaEnlazada {
 		let nodoActual = this.head;
 
 		while (nodoActual.next != null) {
-			str += `${nodoActual.data} <=> `;
+			str += `${nodoActual.value} <=> `;
 			nodoActual = nodoActual.next;
 		}
 
-		str += `${nodoActual.data}`;
+		str += `${nodoActual.value}`;
 
 		console.log(str);
 	}
 
-	fromArray(values) {
-		values.forEach(value => this.push(value));
-
+	fromArray(arr) {
+		arr.forEach(value => this.push(value));
 		return this;
 	}
 	toArray() {
 		const nodes = [];
-
 		let currentNode = this.head;
 		while (currentNode) {
 			nodes.push(currentNode);
 			currentNode = currentNode.next;
 		}
-
 		return nodes;
 	}
 }
 
-const listaEnlazada = new ListaEnlazada();
-listaEnlazada.push(0);
-listaEnlazada.push(1);
-listaEnlazada.push(2);
-listaEnlazada.push(3);
-listaEnlazada.push(4);
-// listaEnlazada.tail.next = listaEnlazada.head;
-// listaEnlazada.head.before = listaEnlazada.tail;
+const doubleList = new DoublyLinkedList(0);
+doubleList.push(0);
+doubleList.push(1);
+doubleList.push(2);
+doubleList.push(3);
+doubleList.push(4);
+// doubleList.tail.next = doubleList.head;
+// doubleList.head.before = doubleList.tail;
 console.log(
-	listaEnlazada.findLoop() ? "Yeah there's a loop" : "Nop there's not a loop",
+	doubleList.findLoop() ? "Yeah there's a loop" : "Nop there's not a loop",
 );

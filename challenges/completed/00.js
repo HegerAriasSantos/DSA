@@ -3,7 +3,6 @@
     target: 4
     output: [0,1]
 */
-
 function Main(arr, target) {
 	let targetIteration = 0;
 	while (true) {
