@@ -88,7 +88,7 @@ class SingleLinkedList {
 	}
 
 	invert() {
-		this.imprimir();
+		this.print();
 		let node = this.head;
 		this.head = this.tail;
 		this.tail = node;
@@ -101,7 +101,7 @@ class SingleLinkedList {
 			node = next;
 		}
 
-		this.imprimir();
+		this.print();
 		return this;
 	}
 
@@ -114,50 +114,50 @@ class SingleLinkedList {
 			// If slow and fast meet at same
 			// point then loop is present
 			if (slow == fast) {
-				this.removeLoop(slow, fast);
-				return true;
+				return {isLoop: true,  loopStart: slow};
 			}
 		}
 		return false;
 	}
 
-	removeLoop(loop, head) {
-		let ptr1 = loop;
-		let ptr2 = loop;
+	removeLoop(loop) {
+		let pointer1 = loop;
+		let pointer2 = loop;
+
 		// Count the number of nodes in loop
-		let k = 1;
-		let i;
-		while (ptr1.next != ptr2) {
-			ptr1 = ptr1.next;
-			k++;
+		let n = 1;
+
+		while (pointer1.next != pointer2) {
+			pointer1 = pointer1.next;
+			n++;
 		}
 		// Fix one pointer to head
-		ptr1 = head;
+		pointer1 = this.head;
 
 		// And the other pointer to
-		// k nodes after head
-		ptr2 = head;
-		for (i = 0; i < k; i++) {
-			ptr2 = ptr2.next;
+		// n nodes after head
+		pointer2 = this.head;
+		for (let i = 0; i < n; i++) {
+			pointer2 = pointer2.next;
 		}
 
 		/*  Move both pointers at the same pace,
      they will meet at loop starting node */
-		while (ptr2 != ptr1) {
-			ptr1 = ptr1.next;
-			ptr2 = ptr2.next;
+		while (pointer2 != pointer1) {
+			pointer1 = pointer1.next;
+			pointer2 = pointer2.next;
 		}
 
 		// Get pointer to the last node
-		while (ptr2.next != ptr1) {
-			ptr2 = ptr2.next;
+		while (pointer2.next != pointer1) {
+			pointer2 = pointer2.next;
 		}
 
 		/* Set the next node of the loop ending node
      to fix the loop */
-		ptr2.next = null;
+		pointer2.next = null;
 	}
-	imprimir() {
+	print() {
 		let str = "";
 		let nodoActual = this.head;
 
@@ -171,7 +171,7 @@ class SingleLinkedList {
 		console.log(str);
 	}
 	createLoop() {
-		this.tail.next = this.head;
+		this.tail.next = this.head.next.next;
 	}
 }
 
@@ -180,7 +180,11 @@ SingleLinkedList2.unshift(1);
 SingleLinkedList2.unshift(2);
 SingleLinkedList2.unshift(3);
 SingleLinkedList2.unshift(4);
-SingleLinkedList2.invert();
-SingleLinkedList2.imprimir();
+SingleLinkedList2.print();
 SingleLinkedList2.createLoop();
-SingleLinkedList2.imprimir();
+const { isLoop, loopStart } = SingleLinkedList2.findLoop()
+console.log(isLoop, "at the node " + loopStart.value );
+if (isLoop === true){
+	SingleLinkedList2.removeLoop(loopStart)
+}
+
