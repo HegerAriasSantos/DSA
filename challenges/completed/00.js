@@ -1,8 +1,10 @@
 /*
-    input: [1,3,5]
-    target: 4
-    output: [0,1]
+		input: [1,3,5]
+		target: 4
+		output: [0,1]
+		Big o(n)
 */
+
 function Main(arr, target) {
 	let targetIteration = 0;
 	while (true) {

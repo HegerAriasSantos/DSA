@@ -1,3 +1,9 @@
+/**
+ * It takes a string, removes all non-alphanumeric characters, removes all spaces, converts the string
+ * to lowercase, and then checks if the string is equal to the reverse of the string.
+ * @param str - the string to be checked
+ * @returns A boolean value.
+ */
 function palindrome(str) {
 	let strReverse = "";
 	str = str.replace(/[^1-9]+/g, "");

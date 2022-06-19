@@ -18,6 +18,7 @@ function convertToRoman(num) {
 		900: "CM",
 		1000: "M",
 	};
+  Object.keys(romans)
 
 	let romansNumber = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000];
 	let pointer = romansNumber.length - 1;
