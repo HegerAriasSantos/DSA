@@ -1,6 +1,6 @@
 import DoubleLinkedList from "../Linked_List/Double-LinkedList";
 
-class Queue {
+export default class Queue {
 	length: number;
 	items: DoubleLinkedList;
 

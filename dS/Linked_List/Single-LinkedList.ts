@@ -194,6 +194,7 @@ class SimplyLinkedList {
 		console.log(linkedList);
 	}
 }
+export default SimplyLinkedList;
 
 // -
 // 0 -> 1 -> 2 -> null
