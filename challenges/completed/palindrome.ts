@@ -4,7 +4,7 @@
  * @param str - the string to be checked
  * @returns A boolean value.
  */
-function palindrome(str) {
+function palindrome(str:string) {
 	let strReverse = "";
 	str = str.replace(/[^1-9]+/g, "");
 	str = str.replace(/\s+/g, "");
